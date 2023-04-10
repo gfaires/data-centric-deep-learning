@@ -93,27 +93,8 @@ class DigitClassifierFlow(FlowSpec):
     scores = []        # populate with scores from each hparams
     best_index = None  # replace with best index
     
-    # ================================
-    # FILL ME OUT
-    # 
-    # Aggregate the best validation performance across inputs into
-    # the variable `scores`.
-    # 
-    # HINT: the `callback` object has a property `best_model_score`
-    #       that make come in handy. 
-    # 
-    # Then, compute the index of the model and store it in `best_index`.
-    # 
-    # Pseudocode:
-    # --
-    # aggregate scores using `inputs`
-    # best_index = ...
-    #
-    # Type:
-    # --
-    # scores: List[float] 
-    # best_index: integer 
-    # ================================
+    scores = [i.callback.best_model_score for i in inputs]
+    best_index = np.argmin(scores)
 
     # sanity check for scores length
     assert len(scores) == len(list(inputs)), "Hmm. Incorrect length for scores."
